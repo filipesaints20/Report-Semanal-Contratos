@@ -1,4 +1,4 @@
-const API = "https://script.google.com/macros/s/SEU_DEPLOY_ID/exec";
+const API = "https://script.google.com/macros/s/AKfycbzNqAp_zRNiwfKVr789Yay90rXMFZnn1fCHrhrVFN0OjbgT1z8uBrG2ywsDxZVYF8f4/exec";
 const token = new URLSearchParams(window.location.search).get("token");
 
 // carregar contratos
