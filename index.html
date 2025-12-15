@@ -1,0 +1,87 @@
+<div class="page">
+
+  <aside class="contracts">
+    <h3>📂 Projetos</h3>
+    <ul id="listaContratos"></ul>
+  </aside>
+
+  <main class="content">
+
+    <h2 id="tituloContrato">Selecione um projeto</h2>
+
+    <form id="formWrapper" class="hidden" onsubmit="event.preventDefault(); enviar();">
+
+      <div class="grid">
+        <div>
+          <label>👤 Nome do Gerente</label>
+          <input id="gerente" name="gerente" readonly>
+        </div>
+
+        <div>
+          <label>📄 Contrato</label>
+          <input id="contrato" name="contrato" readonly>
+        </div>
+
+        <div>
+          <label>📅 Data do envio</label>
+          <input id="dataEnvio" name="dataEnvio" readonly>
+        </div>
+
+        <div>
+          <label>💰 Faturamento Previsto (Mês)</label>
+          <input id="fatPrevMes" name="fatPrevMes" type="number">
+        </div>
+
+        <div>
+          <label>📅💰 Faturamento Próxima Semana</label>
+          <input id="fatProxSemana" name="fatProxSemana" type="number">
+        </div>
+
+        <div>
+          <label>💸 Custo Previsto (Mês)</label>
+          <input id="custoPrevMes" name="custoPrevMes" type="number">
+        </div>
+
+        <div>
+          <label>📆💸 Custo Próxima Semana</label>
+          <input id="custoProxSemana" name="custoProxSemana" type="number">
+        </div>
+
+        <div>
+          <label>👷 Produção Prevista (Mês)</label>
+          <input id="prodPrevMes" name="prodPrevMes">
+        </div>
+
+        <div>
+          <label>✅👷 Produção Realizada (Acumulada)</label>
+          <input id="prodRealMes" name="prodRealMes">
+        </div>
+
+        <div>
+          <label>📆👷 Produção Próxima Semana</label>
+          <input id="prodProxSemana" name="prodProxSemana">
+        </div>
+      </div>
+
+      <label>⚔️ Plano de Guerra – Análise</label>
+      <textarea id="planoGuerra" name="planoGuerra"></textarea>
+
+      <label>🌟 Destaques da Semana</label>
+      <textarea id="destaques" name="destaques"></textarea>
+
+      <label>🎯 Concentrações da Semana</label>
+      <textarea id="concentracoes" name="concentracoes"></textarea>
+
+      <button type="submit">Enviar</button>
+
+    </form>
+
+    <div class="history">
+      <h3>📊 Histórico</h3>
+      <div id="historico"></div>
+    </div>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
