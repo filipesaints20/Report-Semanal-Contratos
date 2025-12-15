@@ -1,16 +1,20 @@
-const API = "https://script.google.com/macros/s/AKfycbzNqAp_zRNiwfKVr789Yay90rXMFZnn1fCHrhrVFN0OjbgT1z8uBrG2ywsDxZVYF8f4/exec";
+const API = "https://script.google.com/macros/s/AKfycbws4W6I1FpoX5L2RRJidsmY5AmgSSEVonOmO-x_kzOBFqlRpCBUgBl5R0uOIYIL3iF1/exec";
 const token = new URLSearchParams(window.location.search).get("token");
 
-// carregar contratos
+let GERENTE = "";
+let CONTRATO_ATUAL = "";
+
+// Carrega gerente e contratos
 fetch(`${API}?token=${token}`)
   .then(r => r.json())
   .then(data => {
-    if (!data.valido) {
-      alert("Acesso inválido");
+    if (data.error) {
+      alert(data.error);
       return;
     }
 
-    gerente.value = data.gerente;
+    GERENTE = data.gerente;
+    document.getElementById("gerente").value = GERENTE;
 
     const ul = document.getElementById("listaContratos");
     ul.innerHTML = "";
@@ -24,20 +28,36 @@ fetch(`${API}?token=${token}`)
   });
 
 function abrirContrato(contrato) {
-  tituloContrato.innerText = contrato;
+  CONTRATO_ATUAL = contrato;
+
+  document.getElementById("tituloContrato").innerText = contrato;
+  document.getElementById("contrato").value = contrato;
+  document.getElementById("dataEnvio").value =
+    new Date().toLocaleDateString("pt-BR");
+
   document.getElementById("formWrapper").classList.remove("hidden");
 
-  fetch(`${API}?token=${token}&contrato=${encodeURIComponent(contrato)}`)
+  carregarHistorico();
+}
+
+function carregarHistorico() {
+  fetch(`${API}?token=${token}&contrato=${encodeURIComponent(CONTRATO_ATUAL)}`)
     .then(r => r.json())
     .then(data => {
       const div = document.getElementById("historico");
       div.innerHTML = "";
 
+      if (!data.historico || data.historico.length === 0) {
+        div.innerHTML = "<p>Sem registros anteriores</p>";
+        return;
+      }
+
       data.historico.forEach(h => {
         div.innerHTML += `
           <div class="history-item">
-            <strong>${h.data}</strong><br>
-            💰 ${h.fatPrevMes} | 💸 ${h.custoPrevMes} | 👷 ${h.prodPrevMes}
+            <strong>${new Date(h.data).toLocaleDateString()}</strong><br>
+            💰 ${h.fatPrevMes} | 💸 ${h.custoPrevMes}<br>
+            👷 ${h.prodRealMes}
           </div>
         `;
       });
@@ -45,23 +65,30 @@ function abrirContrato(contrato) {
 }
 
 function enviar() {
+  const payload = {
+    token: token,
+    gerente: GERENTE,
+    contrato: CONTRATO_ATUAL,
+    fatPrevMes: document.getElementById("fatPrevMes").value,
+    fatProxSemana: document.getElementById("fatProxSemana").value,
+    custoPrevMes: document.getElementById("custoPrevMes").value,
+    custoProxSemana: document.getElementById("custoProxSemana").value,
+    prodPrevMes: document.getElementById("prodPrevMes").value,
+    prodRealMes: document.getElementById("prodRealMes").value,
+    prodProxSemana: document.getElementById("prodProxSemana").value,
+    planoGuerra: document.getElementById("planoGuerra").value,
+    destaques: document.getElementById("destaques").value,
+    concentracoes: document.getElementById("concentracoes").value
+  };
+
   fetch(API, {
     method: "POST",
-    body: JSON.stringify({
-      token,
-      gerente: gerente.value,
-      contrato: contrato.value,
-      faturamentoPrevistoMes: fatPrevMes.value,
-      faturamentoProxSemana: fatProxSemana.value,
-      custoPrevistoMes: custoPrevMes.value,
-      custoProxSemana: custoProxSemana.value,
-      producaoPrevistaMes: prodPrevMes.value,
-      producaoRealizadaMes: prodRealMes.value,
-      producaoProxSemana: prodProxSemana.value,
-      planoGuerra: planoGuerra.value,
-      destaques: destaques.value,
-      concentracoes: concentracoes.value
-    })
+    body: JSON.stringify(payload)
   })
-  .then(() => alert("✅ Enviado"));
+  .then(r => r.json())
+  .then(() => {
+    alert("Relatório enviado com sucesso!");
+    carregarHistorico();
+  });
 }
+
