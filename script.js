@@ -1,4 +1,4 @@
-const API = "https://script.google.com/macros/s/AKfycbws4W6I1FpoX5L2RRJidsmY5AmgSSEVonOmO-x_kzOBFqlRpCBUgBl5R0uOIYIL3iF1/exec";
+const API = "https://script.google.com/macros/s/AKfycbw6s1OEMOBZFrKHi2vHarO4ryuVAf-zROCu6EbsphQndySMDwXWsvBBHRJtO0Px9QSs/exec";
 const token = new URLSearchParams(window.location.search).get("token");
 
 let GERENTE = "";
@@ -6,15 +6,16 @@ let CONTRATO_ATUAL = "";
 
 // Carrega gerente e contratos
 fetch(`${API}?token=${token}`)
-  .then(r => r.json())
-  .then(data => {
+  .then(r => r.text())
+  .then(text => {
+    const data = JSON.parse(text);
+
     if (data.error) {
       alert(data.error);
       return;
     }
 
-    GERENTE = data.gerente;
-    document.getElementById("gerente").value = GERENTE;
+    document.getElementById("gerente").value = data.gerente;
 
     const ul = document.getElementById("listaContratos");
     ul.innerHTML = "";
@@ -22,7 +23,6 @@ fetch(`${API}?token=${token}`)
     data.contratos.forEach(c => {
       const li = document.createElement("li");
       li.textContent = c;
-      li.onclick = () => abrirContrato(c);
       ul.appendChild(li);
     });
   });
