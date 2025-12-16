@@ -1,50 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Semanal de Desempenho dos Contratos</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<title>Formulário Gerencial</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header class="teal-bar">
-        <h1>Report Semanal de Desempenho dos Contratos</h1>
-    </header>
-    <main class="container">
-        <img src="https://effico.com.br/wp-content/uploads/2022/11/Sem-Titulo-2-scaled.jpg" alt="EFFICO Saneamento" class="logo">
-        
-        <div class="nota-instrucao">
-            <strong>Nota de instrução</strong>
-            <p>Preenchimento obrigatório às sextas-feiras. Por favor, preencha este formulário sempre às sextas-feiras, com os dados atualizados da semana. Campos obrigatórios estão marcados com (*). Em caso de dúvidas, entre em contato com a equipe de planejamento.</p>
-        </div>
+<h1>Formulário de Acompanhamento</h1>
 
-        <div class="gerente-info">
-            <strong>Nome do Gerente</strong>
-            <p id="nomeGerente">Carregando...</p>
-        </div>
 
-        <div id="listaContratos"></div>
+<div id="container">
+<div id="formulario"></div>
+<div id="historico">
+<h2>Histórico</h2>
+<input type="date" id="filtroData" />
+<table id="tabelaHistorico"></table>
+</div>
+</div>
 
-        <div id="formWizard" class="hidden">
-            <div class="progress-bar"><div class="progress"></div></div>
-            <h2 id="contratoAtual"></h2>
-            <form id="reportForm">
-                <!-- Campos aqui, populados via JS -->
-            </form>
-            <div class="navigation">
-                <button id="prevBtn" class="btn">Anterior</button>
-                <button id="nextBtn" class="btn teal-btn">Próximo</button>
-                <button id="submitBtn" class="btn teal-btn hidden">Enviar Report</button>
-            </div>
-        </div>
 
-        <footer class="suporte">
-            <h2>Suporte</h2>
-            <p>Equipe de Planejamento</p>
-            <p>Em caso de dúvidas, contatar equipe de planejamento ou Danilo</p>
-        </footer>
-    </main>
-    <script src="js/main.js" defer></script>
+<button onclick="enviar()">Enviar</button>
+
+
+<script src="script.js"></script>
 </body>
 </html>
