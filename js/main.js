@@ -1,79 +1,82 @@
-const API_URL = "SUA_URL_DO_APPS_SCRIPT";
-const token = new URLSearchParams(window.location.search).get('token');
-let gerente = null;
-let contratos = [];
+const API_URL = 'https://script.google.com/macros/s/AKfycbxspTNwiUDpKjwKsYUne4n0vUicHNVvVjukerqYY9VJ-35HAfrkc9L6DLsv10QcDVKl7Q/exec';
 
+// Lê token da URL
+const params = new URLSearchParams(window.location.search);
+const token = params.get('token');
 
-async function init() {
-const res = await fetch(`${API_URL}?action=validar&token=${token}`);
-const data = await res.json();
-if (!data.success) return alert('Acesso negado');
-
-
-gerente = data.gerente;
-contratos = data.contratos;
-montarFormulario();
-carregarHistorico();
+if (!token) {
+  document.getElementById('erro').innerText = 'Token não informado';
+  throw new Error('Token ausente');
 }
 
+// Valida gerente e carrega contratos
+fetch(`${API_URL}?action=validar&token=${token}`)
+  .then(res => res.json())
+  .then(data => {
+    if (!data.success) {
+      document.getElementById('erro').innerText = data.message;
+      return;
+    }
 
-function montarFormulario() {
-const div = document.getElementById('formulario');
-contratos.forEach(c => {
-div.innerHTML += `
-<div class="accordion">
-<div class="accordion-header" onclick="toggle(this)">${c.nome}</div>
-<div class="accordion-content">
-<input placeholder="Faturamento Mês" data-id="${c.id}" data-campo="fat_mes" />
-<input placeholder="Faturamento Semana" data-id="${c.id}" data-campo="fat_semana" />
-<input placeholder="Custo Mês" data-id="${c.id}" data-campo="custo_mes" />
-<input placeholder="Custo Semana" data-id="${c.id}" data-campo="custo_semana" />
-<input placeholder="Produção Mês" data-id="${c.id}" data-campo="prod_mes" />
-<input placeholder="Produção Real" data-id="${c.id}" data-campo="prod_real" />
-<input placeholder="Produção Semana" data-id="${c.id}" data-campo="prod_semana" />
-</div>
-</div>`;
-});
+    renderContratos(data.contratos);
+  });
+
+function renderContratos(contratos) {
+  const container = document.getElementById('formulario');
+
+  contratos.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'contrato';
+
+    div.innerHTML = `
+      <div class="contrato-header">${c.nome}</div>
+      <div class="contrato-body">
+        <input placeholder="Faturamento Previsto Mês" data-field="faturamentoPrevistoMes">
+        <input placeholder="Faturamento Próx. Semana" data-field="faturamentoProximaSemana">
+        <input placeholder="Custo Previsto Mês" data-field="custoPrevistoMes">
+        <input placeholder="Custo Próx. Semana" data-field="custoProximaSemana">
+        <input placeholder="Produção Prevista Mês" data-field="producaoPrevistaMes">
+        <input placeholder="Produção Realizada Mês" data-field="producaoRealizadaMes">
+        <input placeholder="Produção Próx. Semana" data-field="producaoProximaSemana">
+        <textarea placeholder="Plano de Guerra" data-field="planodeGuerra"></textarea>
+        <textarea placeholder="Destaques da Semana" data-field="destaquesdaSemana"></textarea>
+        <textarea placeholder="Concentrações da Semana" data-field="concentracaodaSemana"></textarea>
+      </div>
+    `;
+
+    div.querySelector('.contrato-header').onclick = () => {
+      const body = div.querySelector('.contrato-body');
+      body.style.display = body.style.display === 'none' ? 'block' : 'none';
+    };
+
+    container.appendChild(div);
+  });
 }
 
+// Envio
+document.getElementById('btnEnviar').onclick = () => {
+  const contratos = [];
 
-function toggle(el) {
-const content = el.nextElementSibling;
-content.style.display = content.style.display === 'block' ? 'none' : 'block';
-}
+  document.querySelectorAll('.contrato').forEach(div => {
+    const nomeContrato = div.querySelector('.contrato-header').innerText;
+    const dados = { nomeContrato };
 
+    div.querySelectorAll('[data-field]').forEach(el => {
+      dados[el.dataset.field] = el.value;
+    });
 
-async function enviar() {
-const inputs = document.querySelectorAll('input[data-id]');
-const payload = [];
+    contratos.push(dados);
+  });
 
-
-inputs.forEach(i => {
-payload.push({
-contrato: i.dataset.id,
-campo: i.dataset.campo,
-valor: i.value
-});
-});
-
-
-await fetch(API_URL, {
-method: 'POST',
-body: JSON.stringify({ token, payload })
-});
-
-
-alert('Enviado com sucesso');
-}
-
-
-async function carregarHistorico() {
-const res = await fetch(`${API_URL}?action=historico&token=${token}`);
-const dados = await res.json();
-const tabela = document.getElementById('tabelaHistorico');
-tabela.innerHTML = dados.map(d => `<tr><td>${d.data}</td><td>${d.contrato}</td></tr>`).join('');
-}
-
-
-init();
+  fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token, contratos })
+  })
+    .then(res => res.json())
+    .then(r => {
+      if (r.success) alert('Enviado com sucesso!');
+      else alert(r.message);
+    });
+};
 
