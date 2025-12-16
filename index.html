@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<title>Formulário Gerencial</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Formulário de Contratos</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Formulário de Acompanhamento</h1>
 
+<h1>Preenchimento Semanal</h1>
+
+<div id="erro" class="erro"></div>
 
 <div id="container">
-<div id="formulario"></div>
-<div id="historico">
-<h2>Histórico</h2>
-<input type="date" id="filtroData" />
-<table id="tabelaHistorico"></table>
+  <div id="formulario"></div>
+  <div id="historico">
+    <h3>Histórico</h3>
+    <div id="listaHistorico">Em breve...</div>
+  </div>
 </div>
-</div>
 
-
-<button onclick="enviar()">Enviar</button>
-
+<button id="btnEnviar">Enviar</button>
 
 <script src="script.js"></script>
 </body>
