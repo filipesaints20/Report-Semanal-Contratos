@@ -1,87 +1,50 @@
-<div class="page">
-
-  <aside class="contracts">
-    <h3>📂 Projetos</h3>
-    <ul id="listaContratos"></ul>
-  </aside>
-
-  <main class="content">
-
-    <h2 id="tituloContrato">Selecione um projeto</h2>
-
-    <form id="formWrapper" class="hidden" onsubmit="event.preventDefault(); enviar();">
-
-      <div class="grid">
-        <div>
-          <label>👤 Nome do Gerente</label>
-          <input id="gerente" name="gerente" readonly>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Semanal de Desempenho dos Contratos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="teal-bar">
+        <h1>Report Semanal de Desempenho dos Contratos</h1>
+    </header>
+    <main class="container">
+        <img src="https://effico.com.br/wp-content/uploads/2022/11/Sem-Titulo-2-scaled.jpg" alt="EFFICO Saneamento" class="logo">
+        
+        <div class="nota-instrucao">
+            <strong>Nota de instrução</strong>
+            <p>Preenchimento obrigatório às sextas-feiras. Por favor, preencha este formulário sempre às sextas-feiras, com os dados atualizados da semana. Campos obrigatórios estão marcados com (*). Em caso de dúvidas, entre em contato com a equipe de planejamento.</p>
         </div>
 
-        <div>
-          <label>📄 Contrato</label>
-          <input id="contrato" name="contrato" readonly>
+        <div class="gerente-info">
+            <strong>Nome do Gerente</strong>
+            <p id="nomeGerente">Carregando...</p>
         </div>
 
-        <div>
-          <label>📅 Data do envio</label>
-          <input id="dataEnvio" name="dataEnvio" readonly>
+        <div id="listaContratos"></div>
+
+        <div id="formWizard" class="hidden">
+            <div class="progress-bar"><div class="progress"></div></div>
+            <h2 id="contratoAtual"></h2>
+            <form id="reportForm">
+                <!-- Campos aqui, populados via JS -->
+            </form>
+            <div class="navigation">
+                <button id="prevBtn" class="btn">Anterior</button>
+                <button id="nextBtn" class="btn teal-btn">Próximo</button>
+                <button id="submitBtn" class="btn teal-btn hidden">Enviar Report</button>
+            </div>
         </div>
 
-        <div>
-          <label>💰 Faturamento Previsto (Mês)</label>
-          <input id="fatPrevMes" name="fatPrevMes" type="number">
-        </div>
-
-        <div>
-          <label>📅💰 Faturamento Próxima Semana</label>
-          <input id="fatProxSemana" name="fatProxSemana" type="number">
-        </div>
-
-        <div>
-          <label>💸 Custo Previsto (Mês)</label>
-          <input id="custoPrevMes" name="custoPrevMes" type="number">
-        </div>
-
-        <div>
-          <label>📆💸 Custo Próxima Semana</label>
-          <input id="custoProxSemana" name="custoProxSemana" type="number">
-        </div>
-
-        <div>
-          <label>👷 Produção Prevista (Mês)</label>
-          <input id="prodPrevMes" name="prodPrevMes">
-        </div>
-
-        <div>
-          <label>✅👷 Produção Realizada (Acumulada)</label>
-          <input id="prodRealMes" name="prodRealMes">
-        </div>
-
-        <div>
-          <label>📆👷 Produção Próxima Semana</label>
-          <input id="prodProxSemana" name="prodProxSemana">
-        </div>
-      </div>
-
-      <label>⚔️ Plano de Guerra – Análise</label>
-      <textarea id="planoGuerra" name="planoGuerra"></textarea>
-
-      <label>🌟 Destaques da Semana</label>
-      <textarea id="destaques" name="destaques"></textarea>
-
-      <label>🎯 Concentrações da Semana</label>
-      <textarea id="concentracoes" name="concentracoes"></textarea>
-
-      <button type="submit">Enviar</button>
-
-    </form>
-
-    <div class="history">
-      <h3>📊 Histórico</h3>
-      <div id="historico"></div>
-    </div>
-
-  </main>
-</div>
-
-<script src="script.js"></script>
+        <footer class="suporte">
+            <h2>Suporte</h2>
+            <p>Equipe de Planejamento</p>
+            <p>Em caso de dúvidas, contatar equipe de planejamento ou Danilo</p>
+        </footer>
+    </main>
+    <script src="js/main.js" defer></script>
+</body>
+</html>
