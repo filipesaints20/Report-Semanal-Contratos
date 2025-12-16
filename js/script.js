@@ -1,4 +1,4 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbzVHCRC5yvsIzojlNyyp89SVVx_B-UVd1k5chEilELg7tJxXGGzmS2FZouEaRQCn4HYqQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbxfpiONxV6D8CQfocjH-Y9hSJVItLtcgtmx7h7h41BtBP4_bKu6ykAagvLGtYxr72uZUw/exec';
 
 // Lê token da URL
 const params = new URLSearchParams(window.location.search);
