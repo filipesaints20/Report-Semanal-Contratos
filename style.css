@@ -1,49 +1,107 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f6fa;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+/* TOPO */
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #0b2e4a;
+  color: white;
+  padding: 15px 30px;
+}
+
+.logo {
+  height: 55px;
+}
+
+/* CONTAINER */
+.container {
+  display: flex;
+  gap: 20px;
   padding: 20px;
 }
 
-h1 {
-  margin-bottom: 20px;
+/* FORMULÁRIO */
+.conteudo {
+  flex: 3;
 }
 
-#container {
-  display: flex;
-  gap: 20px;
-}
-
-#formulario {
-  flex: 2;
-}
-
-#historico {
-  flex: 1;
-  background: #fff;
-  padding: 10px;
-  border-radius: 6px;
-}
-
+/* CONTRATO */
 .contrato {
-  background: #fff;
-  margin-bottom: 10px;
+  background: white;
   border-radius: 6px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
 }
 
 .contrato-header {
-  padding: 10px;
+  background: #1f3c5a;
+  color: white;
+  padding: 10px 15px;
+  font-weight: bold;
   cursor: pointer;
-  background: #2f3640;
-  color: #fff;
 }
 
 .contrato-body {
   display: none;
-  padding: 10px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
-input, textarea {
-  width: 100%;
-  margin-bottom: 6px;
-  padding: 6px;
+.contrato-body textarea {
+  grid-column: span 2;
+  resize: vertical;
+}
+
+.contrato-body input,
+.contrato-body textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* HISTÓRICO */
+.historico {
+  flex: 1;
+  background: white;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+/* BOTÃO */
+.btn-enviar {
+  background: #0b2e4a;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn-enviar:hover {
+  background: #15456d;
+}
+
+/* ERRO */
+.erro {
+  color: red;
+  margin-top: 10px;
+}
+
+/* RODAPÉ */
+.rodape {
+  background: #4c4c4c;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  margin-top: 20px;
 }

@@ -2,25 +2,48 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Formulário de Contratos</title>
+  <title>Relatório Semanal - Effico</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Preenchimento Semanal</h1>
+  <!-- TOPO -->
+  <header class="topo">
+    <img src="Effico_logo.png" alt="Effico Saneamento" class="logo">
+    <div>
+      <h1>Relatório Semanal de Contratos</h1>
+      <span id="gerenteNome"></span>
+    </div>
+  </header>
 
-<div id="erro" class="erro"></div>
+  <!-- CONTEÚDO -->
+  <main class="container">
 
-<div id="container">
-  <div id="formulario"></div>
-  <div id="historico">
-    <h3>Histórico</h3>
-    <div id="listaHistorico">Em breve...</div>
-  </div>
-</div>
+    <!-- FORMULÁRIO -->
+    <section class="conteudo">
+      <div id="formulario"></div>
+      <button id="btnEnviar" class="btn-enviar">Enviar Relatório</button>
+      <p id="erro" class="erro"></p>
+    </section>
 
-<button id="btnEnviar">Enviar</button>
+    <!-- HISTÓRICO -->
+    <aside class="historico">
+      <h3>📊 Histórico</h3>
+      <input type="date" id="dataHistorico">
+      <button onclick="carregarHistorico()">Buscar</button>
+      <div id="listaHistorico">Selecione uma data</div>
+    </aside>
 
-<script src="js/script.js"></script>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer class="rodape">
+    <p>
+      Desenvolvido por <strong>Effico Saneamento</strong> •
+      Relatórios Operacionais
+    </p>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbw_GTWunouLB83VQbgX3lQvtFhuMPus-wMA-AZUeu8IUeDnqx7Sxmc40ehHKDvWJM_wcQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyHiWosC0e2bwmxZrLSB5b42mGz_m1jHXsixezdEQN2aQDfv34lwNMfIAB7u4ls4KiOXg/exec';
 
 // ===============================
 // Lê token da URL
