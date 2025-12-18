@@ -47,27 +47,35 @@ function renderContratos(contratos) {
     const div = document.createElement('div');
     div.className = 'contrato';
 
-    div.innerHTML = `
-      <div class="contrato-header" data-id="${c.id}">
-        ${c.nome}
-      </div>
+  div.innerHTML = `
+  <div class="contrato-header">${c.nome}</div>
+  <div class="contrato-body">
 
-      <div class="contrato-body" style="display:none;">
-        <input placeholder="Faturamento Previsto (Mês)" data-field="faturamentoPrevistoMes">
-        <input placeholder="Faturamento Próx. Semana" data-field="faturamentoProximaSemana">
+    <h4> class ="bloco-titulo"> 💰 Faturamento</h4>
+    <div class="grid-2">
+      <input placeholder="Previsto (Mês)" data-field="faturamentoPrevistoMes">
+      <input placeholder="Próx. Semana" data-field="faturamentoProximaSemana">
+    </div>
 
-        <input placeholder="Custo Previsto (Mês)" data-field="custoPrevistoMes">
-        <input placeholder="Custo Próx. Semana" data-field="custoProximaSemana">
+    <h4> class ="bloco-titulo"> 💸 Custos</h4>
+    <div class="grid-2">
+      <input placeholder="Previsto (Mês)" data-field="custoPrevistoMes">
+      <input placeholder="Próx. Semana" data-field="custoProximaSemana">
+    </div>
 
-        <input placeholder="Produção Prevista (Mês)" data-field="producaoPrevistaMes">
-        <input placeholder="Produção Realizada (Mês)" data-field="producaoRealizadaMes">
-        <input placeholder="Produção Próx. Semana" data-field="producaoProximaSemana">
+    <h4> class ="bloco-titulo">👷 Produção</h4>
+    <div class="grid-3">
+      <input placeholder="Realizada (Mês)" data-field="producaoRealizadaMes">
+      <input placeholder="Prevista (Mês)" data-field="producaoPrevistaMes">
+      <input placeholder="Próx. Semana" data-field="producaoProximaSemana">
+    </div>
 
-        <textarea placeholder="Plano de Guerra / Análise" data-field="planodeGuerra"></textarea>
-        <textarea placeholder="Destaques da Semana" data-field="destaquesdaSemana"></textarea>
-        <textarea placeholder="Concentrações da Semana" data-field="concentracaodaSemana"></textarea>
-      </div>
-    `;
+    <h4> class ="bloco-titulo"> 🧠 Análise</h4>
+    <textarea placeholder="Destaques da Semana" data-field="destaquesdaSemana"></textarea>
+    <textarea placeholder="Concentrações da Semana" data-field="concentracaodaSemana"></textarea>
+
+  </div>
+`;
 
     // Abre / fecha contrato
     div.querySelector('.contrato-header').onclick = () => {
