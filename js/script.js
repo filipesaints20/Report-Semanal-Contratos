@@ -48,34 +48,71 @@ function renderContratos(contratos) {
     div.className = 'contrato';
 
   div.innerHTML = `
-  <div class="contrato-header">${c.nome}</div>
-  <div class="contrato-body">
-
-    <h4> 💰 Faturamento</h4>
-    <div class="grid-2">
-      <input placeholder="Previsto (Mês)" data-field="faturamentoPrevistoMes">
-      <input placeholder="Próx. Semana" data-field="faturamentoProximaSemana">
+    <div class="contrato-header" data-id="${c.id}">
+      ${c.nome}
     </div>
 
-    <h4> 💸 Custos</h4>
-    <div class="grid-2">
-      <input placeholder="Previsto (Mês)" data-field="custoPrevistoMes">
-      <input placeholder="Próx. Semana" data-field="custoProximaSemana">
+    <div class="contrato-body">
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">💰 Faturamento</h4>
+        <div class="grid-2">
+          <div class="campo">
+            <label>Previsto (Mês)</label>
+            <input type="number" data-field="faturamentoPrevistoMes">
+          </div>
+          <div class="campo">
+            <label>Próx. Semana</label>
+            <input type="number" data-field="faturamentoProximaSemana">
+          </div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">💸 Custos</h4>
+        <div class="grid-2">
+          <div class="campo">
+            <label>Previsto (Mês)</label>
+            <input type="number" data-field="custoPrevistoMes">
+          </div>
+          <div class="campo">
+            <label>Próx. Semana</label>
+            <input type="number" data-field="custoProximaSemana">
+          </div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">👷 Produção</h4>
+        <div class="grid-3">
+          <div class="campo">
+            <label>Realizada (Mês)</label>
+            <input data-field="producaoRealizadaMes">
+          </div>
+          <div class="campo">
+            <label>Prevista (Mês)</label>
+            <input data-field="producaoPrevistaMes">
+          </div>
+          <div class="campo">
+            <label>Próx. Semana</label>
+            <input data-field="producaoProximaSemana">
+          </div>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <h4 class="bloco-titulo">🧠 Análise</h4>
+
+        <label>Destaques da Semana</label>
+        <textarea data-field="destaquesdaSemana"></textarea>
+
+        <label>Concentrações da Semana</label>
+        <textarea data-field="concentracaodaSemana"></textarea>
+      </div>
+
     </div>
-
-    <h4> 👷 Produção</h4>
-    <div class="grid-3">
-      <input placeholder="Realizada (Mês)" data-field="producaoRealizadaMes">
-      <input placeholder="Prevista (Mês)" data-field="producaoPrevistaMes">
-      <input placeholder="Próx. Semana" data-field="producaoProximaSemana">
-    </div>
-
-    <h4> class ="bloco-titulo"> 🧠 Análise</h4>
-    <textarea placeholder="Destaques da Semana" data-field="destaquesdaSemana"></textarea>
-    <textarea placeholder="Concentrações da Semana" data-field="concentracaodaSemana"></textarea>
-
-  </div>
 `;
+
 
     // Abre / fecha contrato
     div.querySelector('.contrato-header').onclick = () => {
