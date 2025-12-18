@@ -1,4 +1,4 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbxfpiONxV6D8CQfocjH-Y9hSJVItLtcgtmx7h7h41BtBP4_bKu6ykAagvLGtYxr72uZUw/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbw_GTWunouLB83VQbgX3lQvtFhuMPus-wMA-AZUeu8IUeDnqx7Sxmc40ehHKDvWJM_wcQ/exec';
 
 // Lê token da URL
 const params = new URLSearchParams(window.location.search);
@@ -13,16 +13,30 @@ if (!token) {
 fetch(`${API_URL}?action=validar&token=${token}`)
   .then(res => res.json())
   .then(data => {
+    console.log('Resposta da API:', data); // <-- debug
+
     if (!data.success) {
       document.getElementById('erro').innerText = data.message;
       return;
     }
 
     renderContratos(data.contratos);
+  })
+  .catch(err => {
+    document.getElementById('erro').innerText = 'Erro ao carregar API';
+    console.error(err);
   });
 
 function renderContratos(contratos) {
   const container = document.getElementById('formulario');
+  container.innerHTML = ''; // limpa antes
+
+  console.log('Contratos recebidos:', contratos);
+
+  if (!contratos || contratos.length === 0) {
+    container.innerHTML = '<p>Nenhum contrato encontrado.</p>';
+    return;
+  }
 
   contratos.forEach(c => {
     const div = document.createElement('div');
@@ -30,7 +44,7 @@ function renderContratos(contratos) {
 
     div.innerHTML = `
       <div class="contrato-header">${c.nome}</div>
-      <div class="contrato-body">
+      <div class="contrato-body" style="display:none;">
         <input placeholder="Faturamento Previsto Mês" data-field="faturamentoPrevistoMes">
         <input placeholder="Faturamento Próx. Semana" data-field="faturamentoProximaSemana">
         <input placeholder="Custo Previsto Mês" data-field="custoPrevistoMes">
@@ -44,6 +58,7 @@ function renderContratos(contratos) {
       </div>
     `;
 
+    // Toggle abre/fecha
     div.querySelector('.contrato-header').onclick = () => {
       const body = div.querySelector('.contrato-body');
       body.style.display = body.style.display === 'none' ? 'block' : 'none';
@@ -68,6 +83,8 @@ document.getElementById('btnEnviar').onclick = () => {
     contratos.push(dados);
   });
 
+  console.log('Dados enviados:', contratos); // debug
+
   fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -75,8 +92,13 @@ document.getElementById('btnEnviar').onclick = () => {
   })
     .then(res => res.json())
     .then(r => {
+      console.log('Resposta do POST:', r); // debug
       if (r.success) alert('Enviado com sucesso!');
       else alert(r.message);
+    })
+    .catch(err => {
+      alert('Erro ao enviar');
+      console.error(err);
     });
 };
 
