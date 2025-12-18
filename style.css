@@ -66,7 +66,7 @@ body {
 }
 
 .contrato-header {
-  background: #1f3c5a;
+  background: #4C4C4C;
   color: white;
   padding: 12px 18px;
   font-weight: 600;
@@ -99,7 +99,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 14px;
-  color: #0b2e4a;
+  color: #4C4C4C;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -133,7 +133,7 @@ body {
 .campo label {
   font-size: 13px;
   margin-bottom: 5px;
-  color: #334155;
+  color: #4C4C4C;
 }
 
 input,
@@ -149,7 +149,7 @@ textarea {
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #0b2e4a;
+  border-color: #4C4C4C;
 }
 
 textarea {
@@ -186,7 +186,7 @@ textarea {
 ======================= */
 
 .btn-enviar {
-  background: #0b2e4a;
+  background: #4C4C4C;
   color: white;
   padding: 14px 22px;
   border: none;
@@ -197,7 +197,7 @@ textarea {
 }
 
 .btn-enviar:hover {
-  background: #15456d;
+  background: #4C4C4C;
 }
 
 /* =======================
