@@ -51,19 +51,19 @@ function renderContratos(contratos) {
   <div class="contrato-header">${c.nome}</div>
   <div class="contrato-body">
 
-    <h4> class ="bloco-titulo"> 💰 Faturamento</h4>
+    <h4> 💰 Faturamento</h4>
     <div class="grid-2">
       <input placeholder="Previsto (Mês)" data-field="faturamentoPrevistoMes">
       <input placeholder="Próx. Semana" data-field="faturamentoProximaSemana">
     </div>
 
-    <h4> class ="bloco-titulo"> 💸 Custos</h4>
+    <h4> 💸 Custos</h4>
     <div class="grid-2">
       <input placeholder="Previsto (Mês)" data-field="custoPrevistoMes">
       <input placeholder="Próx. Semana" data-field="custoProximaSemana">
     </div>
 
-    <h4> class ="bloco-titulo">👷 Produção</h4>
+    <h4> 👷 Produção</h4>
     <div class="grid-3">
       <input placeholder="Realizada (Mês)" data-field="producaoRealizadaMes">
       <input placeholder="Prevista (Mês)" data-field="producaoPrevistaMes">
